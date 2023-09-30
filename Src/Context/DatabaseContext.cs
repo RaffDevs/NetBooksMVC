@@ -16,7 +16,6 @@ namespace NetBooksMVC.Context
 
         public DbSet<BookCollection> BooksCollection { get; set; }
 
-
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<BookCollection>()
