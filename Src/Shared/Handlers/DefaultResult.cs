@@ -25,9 +25,10 @@ namespace NetBooksMVC.Src.Shared.Handlers
             Data = data;
         }
 
-        public DefaultResult(DefaultError error)
+        public DefaultResult(DefaultError error, T? data)
         {
             Error = error;
+            Data = data;
         }
     }
 }
