@@ -27,7 +27,6 @@ namespace NetBooksMVC.Src.Controllers
         public IActionResult Login(string returnUrl)
         {
 
-
             return View(new LoginViewModel
             {
                 ReturnUrl = returnUrl

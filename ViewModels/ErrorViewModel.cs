@@ -1,4 +1,4 @@
-namespace NetBooksMVC.Models;
+namespace NetBooksMVC.ViewModels;
 
 public class ErrorViewModel
 {
