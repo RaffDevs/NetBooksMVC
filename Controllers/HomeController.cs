@@ -1,12 +1,17 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using NetBooksMVC.Models;
+using NetBooksMVC.ViewModels;
 
 namespace NetBooksMVC.Controllers;
 
 public class HomeController : Controller
 {
     public IActionResult Index()
+    {
+        return View();
+    }
+
+    public IActionResult About()
     {
         return View();
     }
