@@ -84,10 +84,7 @@ public class AccountController : Controller
             }
             else
             {
-                registerVM.errorView = new ErrorMessagesViewModel
-                {
-                    errorMessages = result.Errors.Select(e => e.Description)
-                };
+                registerVM.errorMessages = result.Errors.Select(e => e.Description);
             }
         }
         else
@@ -96,10 +93,7 @@ public class AccountController : Controller
                 .SelectMany(v => v.Errors)
                 .Select(v => v.ErrorMessage);
 
-            registerVM.errorView = new ErrorMessagesViewModel
-            {
-                errorMessages = errors
-            };
+            registerVM.errorMessages = errors;
         }
 
         return View(registerVM);

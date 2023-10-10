@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace NetBooksMVC.ViewModels
 {
-    public class ErrorMessagesViewModel
+    public abstract class ErrorMessagesViewModel
     {
         public IEnumerable<string>? errorMessages { get; set; }
 

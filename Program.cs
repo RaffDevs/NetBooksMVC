@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using NetBooksMVC.Context;
+using NetBooksMVC.Src.Services;
+using NetBooksMVC.Usecases.Api;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,9 +15,15 @@ builder.Services.AddDbContext<DatabaseContext>(options =>
     options.UseSqlServer(databaseConnectionString)
 );
 
+
+
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddEntityFrameworkStores<DatabaseContext>()
     .AddDefaultTokenProviders();
+
+
+builder.Services.AddTransient<GoogleBooksService>();
+builder.Services.AddTransient<RemoteBooksUsecase>();
 
 // builder.Services.Configure<IdentityOptions>(options =>
 // {

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NetBooksMVC.ViewModels
 {
-    public class LoginViewModel
+    public class LoginViewModel : ErrorMessagesViewModel
     {
 
         [Required(ErrorMessage = "Informe o nome do usuário")]
@@ -20,6 +20,5 @@ namespace NetBooksMVC.ViewModels
         public string Password { get; set; }
         public string? ReturnUrl { get; set; }
 
-        public ErrorMessagesViewModel? errorView { get; set; }
     }
 }

@@ -1,24 +1,39 @@
 ﻿using System.Diagnostics;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using NetBooksMVC.Usecases.Api;
 using NetBooksMVC.ViewModels;
 
 namespace NetBooksMVC.Controllers;
 
 public class HomeController : Controller
 {
-    public IActionResult Index()
+    private readonly RemoteBooksUsecase _remoteBooksUsecase;
+
+    public HomeController(
+        RemoteBooksUsecase remoteBooksUsecase
+    )
     {
-        return View();
+        _remoteBooksUsecase = remoteBooksUsecase;
     }
 
-    public IActionResult About()
+    public async Task<IActionResult> Index()
     {
-        return View();
-    }
+        var result = await _remoteBooksUsecase.GetRemoteBooks();
+        var viewmodel = new HomeViewModel();
 
-    public IActionResult Privacy()
-    {
-        return View();
+        if (result.IsSuccess)
+        {
+            viewmodel.books = result.Data.Books;
+        }
+        else
+        {
+            viewmodel.errorMessages = new List<string>{
+                result.Error.Message
+            };
+        }
+
+        return View(viewmodel);
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
