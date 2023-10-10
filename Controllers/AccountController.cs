@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Logging;
 using NetBooksMVC.ViewModels;
 
@@ -60,5 +61,55 @@ public class AccountController : Controller
 
         ModelState.AddModelError("", "Erro ao realizar login");
         return View(loginViewModel);
+    }
+
+    [HttpGet]
+    public IActionResult Register()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Register(LoginViewModel registerVM)
+    {
+        if (ModelState.IsValid)
+        {
+            var user = new IdentityUser { UserName = registerVM.UserName };
+            var result = await _userManager.CreateAsync(user, registerVM.Password);
+
+            if (result.Succeeded)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+            else
+            {
+                registerVM.errorView = new ErrorMessagesViewModel
+                {
+                    errorMessages = result.Errors.Select(e => e.Description)
+                };
+            }
+        }
+        else
+        {
+            IEnumerable<string> errors = ModelState.Values
+                .SelectMany(v => v.Errors)
+                .Select(v => v.ErrorMessage);
+
+            registerVM.errorView = new ErrorMessagesViewModel
+            {
+                errorMessages = errors
+            };
+        }
+
+        return View(registerVM);
+
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Logout()
+    {
+        await _signInManager.SignOutAsync();
+        return RedirectToAction("Login", "Account");
     }
 }

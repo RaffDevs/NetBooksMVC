@@ -17,6 +17,14 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddEntityFrameworkStores<DatabaseContext>()
     .AddDefaultTokenProviders();
 
+// builder.Services.Configure<IdentityOptions>(options =>
+// {
+//     options.Password.RequireDigit = true;
+//     options.Password.RequiredLength = 8;
+//     options.Password.RequireNonAlphanumeric = true;
+//     options.Password.RequireUppercase = true;
+// });
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
