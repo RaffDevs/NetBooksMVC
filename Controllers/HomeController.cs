@@ -17,6 +17,7 @@ public class HomeController : Controller
         _remoteBooksUsecase = remoteBooksUsecase;
     }
 
+    [HttpGet]
     public async Task<IActionResult> Index()
     {
         var result = await _remoteBooksUsecase.GetRemoteBooks();
