@@ -1,0 +1,22 @@
+@model BookItemDTO;
+
+<div class="col-lg-3 col-md-6 col-sm-12">
+    <div class="card">
+        <div class="body text-center media-body">
+            <span>
+                @if (Model.VolumeInfo.ImageLinks.SmallThumbnail != null)
+                {
+                    <img src="@Model.VolumeInfo.ImageLinks.Thumbnail" alt="user" class="rounded-circle" height="90"
+                        width="90" />
+                }
+                else
+                {
+                    <img src="~/images/default-book.svg" alt="user" class="rounded-circle" />
+                }
+            </span>
+            <h6 class="m-t-10">@Model.VolumeInfo.Title</h6>
+
+            <p class="truncate-text">@Model.VolumeInfo.Description</p>
+        </div>
+    </div>
+</div>

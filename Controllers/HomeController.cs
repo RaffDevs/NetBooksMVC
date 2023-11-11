@@ -10,9 +10,7 @@ public class HomeController : Controller
 {
     private readonly RemoteBooksUsecase _remoteBooksUsecase;
 
-    public HomeController(
-        RemoteBooksUsecase remoteBooksUsecase
-    )
+    public HomeController(RemoteBooksUsecase remoteBooksUsecase)
     {
         _remoteBooksUsecase = remoteBooksUsecase;
     }
@@ -36,6 +34,7 @@ public class HomeController : Controller
 
         return View(viewmodel);
     }
+
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
